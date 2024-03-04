@@ -7,37 +7,76 @@
 </head>
 <body>
     <form>
-        <input type="text" id="input1">
-        <input type="text" id="input2">
+        <input type="text" id="input1" >
+        <input type="text" id="input2" >
         <input type="submit" id="plus" value="+">
         <input type="submit" id="minus" value="-">
         <input type="submit" id="multiply" value="*">
         <input type="submit" id="divide" value="/">
     </form>
+    <p></p>
     <script>
         // Salvam valorile din input
         const input1 = document.getElementById('input1');
-        const input1Value = input1.value;
+        const input1Value = parseInt(input1.value);
         const input2 = document.getElementById('input2');
-        const input2Value = input2.value;
+        const input2Value = parseInt(input2.value);
+
+        // selectam operatorii
+        const plus = document.getElementById('plus');
+
+        // selectam paragrapul pentru a introduce valori in functie de ce operatie folosim
+        const paragraf = document.querySelector("p");
+        // paragraf.textContent += "text adaugat";
 
         //adaugam event listener pe buton cand este trigeruit sa se citeasca valoarea -> in functie de buton acceseaza una din functiile de mai jos
+        plus.addEventListener('click', function(){
+            if(isInt(input1Value, input2Value)){
+                sum (input1Value, input2Value)
+            }
+        });
 
-
+        
+    
 
 
 
         // functie sum care primeste 2 valori si returneaza rezultatul
+        function sum (num1, num2){
+            let result = num1 + num2;
+            console.log(sum);
+            paragraf.textContent += result;
+        }
 
         // functie substract care primeste 2 valori si returneaza rezultatul
+        function substract (num1, num2){
+            let result = num1 - num2;
+            paragraf.textContent += result;
+        }
 
         // functie multiply care primeste 2 valori si returneaza rezultatul
+        function multiply (num1, num2){
+            let result = num1 * num2;
+            paragraf.textContent += result;
+        }
 
-        // functie substract care primeste 2 valori si returneaza rezultatul
+        // functie divide care primeste 2 valori si returneaza rezultatul
+        function divide (num1, num2){
+            let result = num1 / num2;
+            paragraf.textContent += result;
+        }
 
-        // functie care verifica daca inputul este numar sau string -> daca nu este numar atunci trebuie 
+        // functie care verifica daca inputul este numar sau string -> daca nu este numar atunci trebuie sa afiseze eroarea
+        function isInt (num1, num2){
+            if (num1 === NaN || num2 === NaN){
+                paragraf.textContent += 'Unul din numere nu este un numar';
+                return false;
+            }
+            else return true;
+            
+        }
 
-        // functie care creaza prin DOM un paragraf care sa contina rezultatul sau eroare
+    
 
     </script>
 
