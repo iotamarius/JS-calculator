@@ -9,72 +9,87 @@
     <form>
         <input type="text" id="input1" >
         <input type="text" id="input2" >
-        <input type="submit" id="plus" value="+">
-        <input type="submit" id="minus" value="-">
-        <input type="submit" id="multiply" value="*">
-        <input type="submit" id="divide" value="/">
+        <input type="button" id="plus" value="+">
+        <input type="button" id="minus" value="-">
+        <input type="button" id="multiply" value="*">
+        <input type="button" id="divide" value="/">
+        <div class=""result></div>
     </form>
-    <p></p>
     <script>
-        // Salvam valorile din input
-        const input1 = document.getElementById('input1');
-        const input1Value = parseInt(input1.value);
-        const input2 = document.getElementById('input2');
-        const input2Value = parseInt(input2.value);
+        // Selectam elementele
+        const input1 = document.querySelector('#input1');
+         // const input1Value = parseInt(input1.value); (daca le pui de la inceput nu vor putea lua informatiile viitoare) 
+        const input2 = document.querySelector('#input2');
+        // const input2Value = parseInt(input2.value); (daca le pui la inceput nu vor putea lua informatiile viitoare)
 
         // selectam operatorii
-        const plus = document.getElementById('plus');
-
-        // selectam paragrapul pentru a introduce valori in functie de ce operatie folosim
-        const paragraf = document.querySelector("p");
-        // paragraf.textContent += "text adaugat";
+        const plus = document.querySelector('#plus');
+        const minus = document.querySelector('#minus);
+        const multiply = document.querySelector('#multiply');
+        const divide = document.querySelector('#divide');
+        
+        // selectam paragrapul pentru a-l putea modifica prin innerHTML direct
+        const result = document.querySelector(".result");
+       
 
         //adaugam event listener pe buton cand este trigeruit sa se citeasca valoarea -> in functie de buton acceseaza una din functiile de mai jos
-        plus.addEventListener('click', function(){
-            if(isInt(input1Value, input2Value)){
-                sum (input1Value, input2Value)
-            }
+        plus.addEventListener('click', () => {
+            const nr1 = Number(input1.value);
+            const nr2 = Number(input2.value);
+            const sum = nr1 + nr2;
+            result.innerHTML = `Rezultatul operatiei este: ${sum}`;
+            
         });
 
         
     
 
+        
 
+        // adaugam event listener pe minus 
+        minus.addEventListener('click', () => {
+            const nr1 = Number(input1.value);
+            const nr2 = Number(input2.value);
+            const diference = nr1 - nr2;
+            result.innerHTML = `Rezultatul operatiei este: ${diference}`;
+        });
 
-        // functie sum care primeste 2 valori si returneaza rezultatul
-        function sum (num1, num2){
-            let result = num1 + num2;
-            console.log(sum);
-            paragraf.textContent += result;
-        }
+        // adaugam event listener pe multiply
+        multiply.addEventListener('click', () => {
+            const nr1 = Number(input1.value);
+            const nr2 = Number(input2.value);
+            const multiplyResult = nr1 * nr2;
+            result.innerHTML = `Rezultatul operatiei este: ${multiplyResult}`;
+        });
 
-        // functie substract care primeste 2 valori si returneaza rezultatul
-        function substract (num1, num2){
-            let result = num1 - num2;
-            paragraf.textContent += result;
-        }
+        // adaugam event listener pe divide 
+        divide.addEventListener('click', () => {
+            const nr1 = Number(input1.value);
+            const nr2 = Number(input2.value);
+            const divideResult = nr1 / nr2;
+            result.innerHTML = `Rezultatul operatiei este: ${divideResult}`
+        });
 
-        // functie multiply care primeste 2 valori si returneaza rezultatul
-        function multiply (num1, num2){
-            let result = num1 * num2;
-            paragraf.textContent += result;
-        }
-
-        // functie divide care primeste 2 valori si returneaza rezultatul
-        function divide (num1, num2){
-            let result = num1 / num2;
-            paragraf.textContent += result;
-        }
-
-        // functie care verifica daca inputul este numar sau string -> daca nu este numar atunci trebuie sa afiseze eroarea
-        function isInt (num1, num2){
-            if (num1 === NaN || num2 === NaN){
-                paragraf.textContent += 'Unul din numere nu este un numar';
-                return false;
+        // Adaugam event listener-uri pe input-uri acum pentru a transmite o eroare in cazul in care nu in input-uri se tasteaza altceva in afara de numere
+        input1.addEventListener('input', (event) => {
+            const value = event.target.value;
+            if(isNaN(value)) {
+                result.innerHTML = 'Va rugam sa introduceti o valoare numerica.';
+                    
+            }else {
+                result.innerHTML = '';
             }
-            else return true;
-            
-        }
+        });
+        input2.addEventListener('input', (event) => {
+            const value = event.target.value;
+            if(isNaN(value)) {
+                result.innerHTML = 'Va rugam sa introduceti o valoare numerica.';
+                    
+            }else {
+                result.innerHTML = '';
+            }
+                
+      )};
 
     
 
